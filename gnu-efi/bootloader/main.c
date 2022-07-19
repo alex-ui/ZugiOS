@@ -77,7 +77,10 @@ EFI_FILE* LoadFile(EFI_FILE* Directory, CHAR16* Path, EFI_HANDLE ImageHandle, EF
 
 PSF1_FONT* LoadPSF1Font(EFI_FILE* Directory, CHAR16* Path, EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE* SystemTable) {
 	EFI_FILE* font = LoadFile(Directory, Path, ImageHandle, SystemTable);
-	if (font == NULL) return NULL;
+	if (font == NULL) {
+		Print(L"null font");
+		return NULL;
+	}
 
 	PSF1_HEADER* fontHeader;
 	SystemTable->BootServices->AllocatePool(EfiLoaderData, sizeof(PSF1_HEADER), (void**)&fontHeader);
